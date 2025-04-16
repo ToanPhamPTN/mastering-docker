@@ -498,9 +498,15 @@ EXPOSE 8082
 ENTRYPOINT ["java","-jar","/my-service.jar"]
 ```
 
-### Result for optimize image
+### Result for docker and optimize
 
-![Screenshot_44](https://github.com/user-attachments/assets/7305ac57-4816-4987-b01f-4cc535b251a0)
+![docker container](assets/Screenshot_47.png)
+
+![Service one](assets/Screenshot_45.png)
+
+![Service two](assets/Screenshot_46.png)
+
+![Optimize image exercise](assets/Screenshot_44.png)
 
 
 ### Part Final: Migrate to Docker Compose (Optional)
