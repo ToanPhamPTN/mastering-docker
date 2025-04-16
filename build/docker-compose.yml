@@ -8,6 +8,9 @@ services:
     container_name: "api-gateway"
     hostname: "api-gateway"
     build: ../application/api-gateway/target
+    tty: true
+    init: true
+    privileged: true
     ports:
       - "8080:8080"
     expose:
@@ -26,6 +29,9 @@ services:
     container_name: "service-one"
     hostname: "service-one"
     build: ../application/service-one/target
+    tty: true
+    init: true
+    privileged: true
     ports:
       - "8082:8082"
     depends_on:
@@ -51,6 +57,9 @@ services:
       - MONGO_LOG_DIR=/dev/null
     volumes:
       - mongodata:/data/db
+    tty: true
+    init: true
+    privileged: true  
     ports:
       - "27017:27017"
     expose:
@@ -67,6 +76,10 @@ services:
     container_name: "service-two"
     hostname: "service-two"
     build: ../application/service-two/target
+    tty: true
+    init: true
+    privileged: true
+    restart: always
     ports:
       - "8084:8084"
     depends_on:
@@ -84,12 +97,15 @@ services:
   service-two-db:
     container_name: "service-two-db"
     hostname: "servicetwodb"
-    image: "mysql/mysql-server:5.7"
+    image: "mysql/mysql-server:8.0"
     environment:
       - MYSQL_ROOT_PASSWORD=root123
       - MYSQL_DATABASE=service-two
       - MYSQL_USER=service-two 
       - MYSQL_PASSWORD=service-two
+    tty: true
+    init: true
+    privileged: true
     ports:
       - "3310:3306"
     expose:
@@ -108,6 +124,9 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./dist:/usr/share/nginx/html
+    tty: true
+    init: true
+    privileged: true
     ports:
       - "80:4200"
 
@@ -119,8 +138,8 @@ services:
   # ---------------------------
   rabbit:
     image: rabbitmq:3.8-management-alpine
-    container_name: rabbit-mq
-    hostname: rabbitmq
+    container_name: rabbit
+    hostname: rabbit
     ports:
       - "5672:5672"
       - "15672:15672"
@@ -151,12 +170,14 @@ services:
       - "8500"
       - "8600"
     networks:
-      - backenddocker network create -d bridge build_backend
+      - backend
 
 networks:
   frontend:
+    name: frontend
     driver: bridge
   backend:
+    name: backend
     driver: bridge
 
 volumes:

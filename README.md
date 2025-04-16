@@ -224,7 +224,7 @@ $ docker run -d --tty --init --privileged \
 			 --env MYSQL_DATABASE=service-two \
 			 --env MYSQL_USER=service-two \
 			 --env MYSQL_PASSWORD=service-two \
-			 mysql/mysql-server:5.7
+			 mysql/mysql-server:8.0
 ```
 
 ```bash
@@ -280,8 +280,8 @@ $ docker run -d --tty --init --privileged \
 			 -p 15672:15672 \
 			 --expose 15672 \
 			 --network build_backend \
-			 --hostname rabbitmq \
-			 --name rabbit-mq \
+			 --hostname rabbit \
+			 --name rabbit \
 			 --env CLUSTERED=true \
 			 --env RAM_NODE=true \
 			 --env CLUSTER_WITH=rabbit \
